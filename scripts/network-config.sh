@@ -5,7 +5,7 @@ do
 	if [ "$(cat /sys/class/net/$iface/type)" -eq "1" ]; then
 		echo "[Match]" > /etc/systemd/network/10-eth-dhcp.network
 
-		echo $iface >> /etc/systemd/network/10-eth-dhcp.network
+		echo "Name=$iface" >> /etc/systemd/network/10-eth-dhcp.network
 		echo "" >> /etc/systemd/network/10-eth-dhcp.network
 		echo "[Network]" >> /etc/systemd/network/10-eth-dhcp.network
 		echo "DHCP=ipv4" >> /etc/systemd/network/10-eth-dhcp.network
@@ -16,8 +16,6 @@ do
 		break
 	fi
 done;
-
-ln -sfv /run/systemd/resolve/resolv.conf /etc/resolv.conf
 
 cat > /etc/resolv.conf << "EOF"
 # Begin /etc/resolv.conf

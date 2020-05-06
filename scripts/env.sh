@@ -1,5 +1,5 @@
 export PLXINST=/mnt/sdb1
-exec env -i HOME=$HOME TERM=$TERM PS1='\u:\w\$ ' /bin/bash
+#exec env -i HOME=$HOME TERM=$TERM PS1='\u:\w\$ ' /bin/bash
 set +h
 umask 022
 LC_ALL=POSIX

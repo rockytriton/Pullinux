@@ -1,3 +1,8 @@
+echo "Creating directories..."
+echo "PATH: $PATH"
+LS=$(ls -ls /tools/bin)
+echo "LS:$LS"
+
 mkdir -pv /{bin,boot,etc/{opt,sysconfig},home,lib/firmware,mnt,opt}
 mkdir -pv /{media/{floppy,cdrom},sbin,srv,var}
 install -dv -m 0750 /root
@@ -79,7 +84,7 @@ nogroup:x:99:
 users:x:999:
 EOF
 
-exec /tools/bin/bash --login +h
+#exec /tools/bin/bash --login +h
 
 touch /var/log/{btmp,lastlog,faillog,wtmp}
 chgrp -v utmp /var/log/lastlog
