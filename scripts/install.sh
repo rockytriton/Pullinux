@@ -1,4 +1,13 @@
-PLXINST=$1
+
+if [ ! -z "$1" ]; then
+	PLXINST=$1
+fi
+
+if [ -z "$PLXINST" ]; then
+	echo "Must set PLXINST varaible!"
+	exit
+fi
+
 
 echo "Installing to $PLXINST"
 echo "Press any key to continue..."
