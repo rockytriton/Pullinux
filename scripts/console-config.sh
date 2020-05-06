@@ -58,3 +58,5 @@ cat > /etc/systemd/system/getty@tty1.service.d/noclear.conf << EOF
 TTYVTDisallocate=no
 EOF
 
+mkdir /var/run/nscd
+
