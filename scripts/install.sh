@@ -15,13 +15,13 @@ echo "Press any key to continue..."
 read -n 1
 
 echo "Copying tools..."
-#cp -r ../tools $PLXINST/
+cp -r ../tools $PLXINST/
 
 echo "Copying scripts..."
 cp -r ../scripts $PLXINST/
 
 echo "Copying packages..."
-#cp -r ../packages $PLXINST/
+cp -r ../packages $PLXINST/
 
 ./prepare.sh
 
