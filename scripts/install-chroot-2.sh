@@ -4,4 +4,5 @@ cd /scripts
 ./clock-config.sh
 ./release.sh
 ./fstab.sh
+./grub.sh
 exit

@@ -1,6 +1,6 @@
 
 if [ ! -z "$1" ]; then
-	PLXINST=$1
+	export PLXINST=$1
 fi
 
 if [ -z "$PLXINST" ]; then
@@ -8,8 +8,24 @@ if [ -z "$PLXINST" ]; then
 	exit
 fi
 
+if [ ! -b $PLXINST ]; then
+	echo "$PLXINST is not a block device."
+	exit
+fi
+
+export BLKDEV=$(lsblk -no pkname $PLXINST)
+
+mkdir -p /tmp/plx_mount
+
+if ! mount $PLXINST /tmp/plx_mount ; then
+	echo "Unable to mount device" 
+	exit
+fi
+
+export PLXINST=/tmp/plx_mount
 
 echo "Installing to $PLXINST"
+echo "Block device: $BLKDEV"
 echo "Press any key to continue..."
 
 read -n 1

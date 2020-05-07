@@ -18,13 +18,13 @@ fi
 if test -f "/tmp/pullit/_install/preinstall.sh"; then
 	echo "running pre-install..."
 	chmod u+x /tmp/pullit/_install/preinstall.sh
-	/tmp/pullit/_install/preinstall.sh
+	/tmp/pullit/_install/preinstall.sh || echo "FAILED: $1" && exit
 fi
 
 if test -f "/tmp/pullit/_install/install.sh"; then
 	echo "running install..."
 	chmod u+x /tmp/pullit/_install/install.sh 
-	/tmp/pullit/_install/install.sh
+	/tmp/pullit/_install/install.sh || echo "FAILED: $1" && exit
 fi 
 
 if test -d "/tmp/pullit/_install"; then
@@ -33,6 +33,5 @@ fi
 
 echo ""
 echo "DONE"
-echo ""
 echo ""
 

@@ -1,4 +1,4 @@
-echo "Enter root mount partition: "
+echo "Enter root mount partition for fstab: "
 read P
 
 cat > /etc/fstab << "EOF"
