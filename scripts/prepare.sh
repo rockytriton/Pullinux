@@ -1,5 +1,3 @@
-PLXINST=/mnt/plx
-
 echo "DOING THIS ON $PLXINST"
 
 mkdir -pv $PLXINST/{dev,proc,sys,run}

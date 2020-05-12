@@ -39,15 +39,21 @@ cp -r ../scripts $PLXINST/
 echo "Copying packages..."
 cp -r ../packages $PLXINST/
 
+echo "Preparing..."
 ./prepare.sh
 
+echo "Installing Packages..."
 chroot "$PLXINST" /tools/bin/env -i HOME=/root TERM="$TERM" PS1='(plx chroot) \u:\w\$ ' \
 	        PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin \
 		        /scripts/install-chroot-1.sh
 
-chroot "$PLXINST" /usr/bin/env -i HOME=/root TERM="$TERM" PS1='<pullinx-chroot> \u:\w\$ ' \
+echo "Configuring..."
+chroot "$PLXINST" /usr/bin/env -i BLKDEV=$BLKDEV HOME=/root TERM="$TERM" PS1='<pullinx-chroot> \u:\w\$ ' \
 	PATH=/bin:/usr/bin:/sbin:/usr/sbin \
 	/scripts/install-chroot-2.sh
+
+echo "Cleaning up"
+./cleanup.sh
 
 echo ""
 echo "Installation Complete"
