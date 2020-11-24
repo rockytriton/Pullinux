@@ -2,8 +2,18 @@ fullpck=$1
 pck=$(basename $1)
 p2=$2
 dst=${p2:-/}
+ending="-pullinux-1.1.0.tar.xz"
+pckname=$(basename -s $ending $pck)
+pcklist=/tmp/pcklist.txt
 
-echo "Installing ${pck:?} to ${dst:?}..."
+found=$(grep -E "^$pckname$" $pcklist)
+
+if [ "$found" == "" ]; then
+	echo "Installing ${pck:?} to ${dst:?}..."
+else
+	echo "$pckname already installed."
+	exit -1
+fi
 
 if [ -d "/tmp/_plxinst" ]; then
 	rm -rf /tmp/_plxinst
@@ -15,8 +25,22 @@ cp $fullpck /tmp/_plxinst
 tar -xf /tmp/_plxinst/$pck -C /tmp/_plxinst ./.dep 2> /dev/null
 
 if [ -f "/tmp/_plxinst/.dep" ]; then
-	echo "Has Dependencies:"
-	cat /tmp/_plxinst/.dep
+	echo "    Dependencies:"
+	deps=$(cat /tmp/_plxinst/.dep)
+	rm /tmp/_plxinst/.dep
+
+	for f in $deps
+	do
+		found=$(grep -E "^$f$" $pcklist)
+
+		if [ "$found" != "" ]; then
+			echo "        $f already installed."	
+			continue
+		fi
+
+		$0 $(dirname $fullpck)/$f$ending $dst
+	done;
+
 else
 	echo "No Dependencies"
 fi
@@ -47,4 +71,8 @@ if [ -f "_install/install.sh" ]; then
 fi
 
 rm -rf _install
+rm -rf /tmp/_plxinst
 
+echo $pckname >> $pcklist
+
+echo "Installing $pckname complete."
