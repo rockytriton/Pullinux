@@ -4,15 +4,18 @@ p2=$2
 dst=${p2:-/}
 ending="-pullinux-1.1.0.tar.xz"
 pckname=$(basename -s $ending $pck)
-pcklist=/tmp/pcklist.txt
+pcklist=/usr/share/pullinux/pcklist.txt
 
 found=$(grep -E "^$pckname$" $pcklist)
+scdir=$(dirname $0)
 
-if [ "$found" == "" ]; then
-	echo "Installing ${pck:?} to ${dst:?}..."
-else
+$scdir/checkinst.sh $pckname $pcklist
+
+if [ $? -eq 0 ]; then
 	echo "$pckname already installed."
-	exit -1
+        exit -1
+else
+	echo "Installing ${pck:?} to ${dst:?}..."
 fi
 
 if [ -d "/tmp/_plxinst" ]; then
@@ -33,12 +36,21 @@ if [ -f "/tmp/_plxinst/.dep" ]; then
 	do
 		found=$(grep -E "^$f$" $pcklist)
 
-		if [ "$found" != "" ]; then
+		$scdir/checkinst.sh $f $pcklist
+
+		if [ $? -eq 0 ]; then
 			echo "        $f already installed."	
 			continue
 		fi
 
 		$0 $(dirname $fullpck)/$f$ending $dst
+
+		if [ $? -eq 0 ]; then
+			echo "ok"
+		else
+			echo "Failed to install dependency!"
+			exit -1
+		fi
 	done;
 
 else
@@ -70,8 +82,9 @@ if [ -f "_install/install.sh" ]; then
 	cd ..
 fi
 
-rm -rf _install
-rm -rf /tmp/_plxinst
+rm -rf .dep 2> /dev/null || true
+rm -rf _install || true
+rm -rf /tmp/_plxinst || true
 
 echo $pckname >> $pcklist
 

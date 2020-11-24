@@ -1,3 +1,5 @@
+linux-5.8.3-headers-pullinux-1.1.0.tar.xz
+linux-5.8.3-modules-pullinux-1.1.0.tar.xz
 dbus-1.12.20-pullinux-1.1.0.tar.xz
 procps-ng-3.3.16-pullinux-1.1.0.tar.xz
 util-linux-2.36-pullinux-1.1.0.tar.xz
@@ -18,6 +20,9 @@ which-2.21-pullinux-1.1.0.tar.xz
 icu-67.1-pullinux-1.1.0.tar.xz
 polkit-0.117-pullinux-1.1.0.tar.xz
 systemd-246-pullinux-1.1.0.tar.xz
-make-ca-1.7-pullinux-1.1.0.tar.xz
 wget-1.20.3-pullinux-1.1.0.tar.xz
 openssh-8.3p1-pullinux-1.1.0.tar.xz
+curl-7.71.1-pullinux-1.1.0.tar.xz
+libcap-pam-2.42-pullinux-1.1.0.tar.xz
+mozjs-68.11.0-pullinux-1.1.0.tar.xz
+sqlite-3.33.0-pullinux-1.1.0.tar.xz

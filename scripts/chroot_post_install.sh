@@ -103,4 +103,5 @@ UseDomains=true
 EOF
 
 ssh-keygen -A
+chmod u+s /usr/bin/sudo
 
