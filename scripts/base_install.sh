@@ -26,14 +26,7 @@ for f in $(cat $PLXINST/packages/base_packages.txt)
 do
 	echo $f
 	tar -xhf $PLXINST/packages/$f
-#	if scripts/pckinst.sh $f $PLXINST ; then
-#		echo "Installed."
-#	else
-#		echo "Failed."
-#		exit
-#	fi
 done;
 
 ln -sv bash $PLXINST/bin/sh
-#ln -sv /proc/self/mounts $PLXINST/etc/mtab
 
